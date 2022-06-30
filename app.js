@@ -1,14 +1,14 @@
 const inputName = document.getElementById("inputName");
 const inputCost = document.getElementById("inputCost");
 const list = document.getElementById("list-p");
-let ArrayPeople = [];
+let arrayP = [];
 let restAcum = 0
 
 function validar() {
-    ArrayPeople.push([inputName.value, inputCost.value]);
+    arrayP.push([inputName.value, inputCost.value]);
     let li = document.createElement("li");
     li.classList.add("list-group-item");
-    li.innerText = ArrayPeople.at(-1)[0] + ": " + ArrayPeople.at(-1)[1]
+    li.innerText = arrayP.at(-1)[0] + ": " + arrayP.at(-1)[1]
     li.append(closeButton());
     list.append(li);
 
@@ -19,8 +19,8 @@ function closeButton() {
     Close.addEventListener('click', function deteleItem() {
         const str = this.parentElement.textContent;
         const name = str.slice(0, str.indexOf(':'));
-        ArrayPeople = ArrayPeople.filter(elem => elem[0] !== name)
-        console.log(ArrayPeople)
+        arrayP = arrayP.filter(elem => elem[0] !== name)
+        console.log(arrayP)
         this.parentElement.remove();
         totalValue();
     }, false);
@@ -30,12 +30,12 @@ function closeButton() {
 
 function totalValue() {
     let acum = 0;
-    for (const people of ArrayPeople) {
+    for (const people of arrayP) {
         acum += (people[1] - 0) - restAcum;
         console.log(acum);
     }
 
-    let total = acum / ArrayPeople.length;
+    let total = acum / arrayP.length;
     let div = document.getElementById("total");
     div.innerText = "A pagar cada uno: " + total;
 }
